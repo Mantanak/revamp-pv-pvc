@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: addrevamp-cms-azure-file-pvc
+  namespace: insurance
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: addrevamp-cms
+  volumeMode: Filesystem
+  volumeName: addrevamp-cms-azure-file-pv

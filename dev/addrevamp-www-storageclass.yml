@@ -1,0 +1,23 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: addrevamp-www
+provisioner: file.csi.azure.com
+allowVolumeExpansion: true
+parameters:
+  resourceGroup: rg-insurance-az-asse-dev-001
+  storageAccount: stinsuranceazassedev001
+  server: stinsuranceazassedev001.file.core.windows.net 
+  shareName: www
+  protocol: nfs
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+mountOptions:
+  - dir_mode=0777
+  - uid=0
+  - gid=0
+  - mfsymlinks
+  - nconnect=8
+  - cache=strict  # https://linux.die.net/man/8/mount.cifs
+  - nosharesock  # reduce probability of reconnect race
+  - actimeo=30  # reduce latency for metadata-heavy workload
